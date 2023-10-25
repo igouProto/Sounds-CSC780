@@ -6,7 +6,6 @@ The following is a tentative list of features to be implemented
 - Register / login / logout
 - Feed that displays posts from all users
 - Like posts
-- Make a post from the result of music recognition (ShazamKit)
 - Make a post from the result of searching for a song (Genius / Spotify api)
 - Make a pure text post
 - Posts with music information embedded
@@ -15,6 +14,7 @@ The following is a tentative list of features to be implemented
 - Delete posts
 
 ## Good to have features
+- Make a post from the result of music recognition (ShazamKit)
 - Reposting
 - Add comment to posts
 - Quote lyrics when posting
