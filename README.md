@@ -1,6 +1,7 @@
 # Sounds-CSC780
 Sounds is a conceptual social media platform revolves around music. Users can post about what they heard outside with music recognition, share a song that they like, or just simply make a text post. (This will be the term project for my app development class!)
-The following is a tentative list of features to be implemented
+
+The following is a tentative list of features to be implemented:
 
 ## Must have features
 - Register / login / logout
