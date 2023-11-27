@@ -7,9 +7,11 @@
 
 import SwiftUI
 import SwiftData
+import Firebase
 
 @main
 struct sndsApp: App {
+    /*
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -22,11 +24,16 @@ struct sndsApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+     */
+    
+    init(){
+        FirebaseApp.configure()
+    }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
+        // .modelContainer(sharedModelContainer)
     }
 }
