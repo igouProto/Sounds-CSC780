@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import PhotosUI
+// import PhotosUI
 
 import Firebase
 import FirebaseStorage
@@ -35,7 +35,7 @@ struct SignupView: View {
     // control showing views
     @Binding var signingUp: Bool
     @State var showImgPicker: Bool = false
-    @State var pfpSelected: PhotosPickerItem?
+    // @State var pfpSelected: PhotosPickerItem?
     
     // error handling
     @State var showError: Bool = false

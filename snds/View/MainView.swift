@@ -16,13 +16,19 @@ struct MainView: View {
     var loggedInState: LoginState
     
     var body: some View {
-        Text("Logged in as: \(user.userName)")
-        Button(action: logout, label: {
-            Text("Logout")
-        })
-    }
-    
-    func logout () {
-        loggedInState = .loggedOut
+        
+        TabView {
+            PostsView(user: user, loggedInState: $loggedInState)
+                .tabItem {
+                    Label("Posts", systemImage: "square")
+                }
+            
+            ProfileView(user: user, profile: nil, loggedInState: $loggedInState)
+                .tabItem {
+                    Label("Profile", systemImage: "square")
+                }
+            
+        }
+        
     }
 }

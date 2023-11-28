@@ -12,4 +12,8 @@ enum LoginState {
     // case loading
     case loggedOut
     case loggedIn(User)
+    
+    init() {
+        self = .loggedOut
+    }
 }

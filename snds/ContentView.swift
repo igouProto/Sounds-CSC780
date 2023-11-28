@@ -11,7 +11,8 @@ import SwiftData
 struct ContentView: View {
     
     @State
-    var loginState: LoginState = .loggedOut
+    // var loginState: LoginState = .loggedOut
+    var loginState: LoginState = .loggedIn(dummyUser)
     
     var body: some View {
         switch loginState {
