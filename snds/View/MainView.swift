@@ -20,12 +20,12 @@ struct MainView: View {
         TabView {
             PostsView(user: user, loggedInState: $loggedInState)
                 .tabItem {
-                    Label("Posts", systemImage: "square")
+                    Label("Posts", systemImage: "newspaper")
                 }
             
-            ProfileView(user: user, profile: nil, loggedInState: $loggedInState)
+            ProfileView(user: user, loggedInState: $loggedInState)
                 .tabItem {
-                    Label("Profile", systemImage: "square")
+                    Label("Profile", systemImage: "person.crop.circle")
                 }
             
         }

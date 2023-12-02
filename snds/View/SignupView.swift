@@ -142,7 +142,7 @@ struct SignupView: View {
                 
                 guard let userUID = Auth.auth().currentUser?.uid else { return }
                 
-                // upload pfp to firebase storage
+                // upload pfp to firebase storage (don't have time for this now)
                 /*
                 guard let img = userPFP else { return }
                 let storageReference = Storage.storage().reference().child("PFPs").child(userUID)

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct UserContents: View {
     
-    var profile: User
+    var user: User
+    
+    @State
+    private var recentPosts: [Post] = []
     
     var body: some View {
         VStack{
@@ -18,10 +21,11 @@ struct UserContents: View {
                 .fontWeight(.semibold)
                 .foregroundStyle(.black)
                 .hAlign(.leading)
-                .padding(.vertical, 20)
+                .padding(20)
             
-        }
-        .padding(20)
-        
+            // TODO: Show the user's posts
+            PostsContainer(user: user, posts: $recentPosts, fetchingByUID: true, fetchUserUID: user.userUID)
+            
+        }        
     }
 }

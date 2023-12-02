@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileCard: View {
     
-    var profile: User
+    var user: User
     
     var body: some View {
         VStack{
@@ -21,12 +21,12 @@ struct ProfileCard: View {
                     .contentShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                 
                 VStack (alignment: .center, spacing: 6){
-                    Text(profile.userDispName)
+                    Text(user.userDispName)
                         .font(.title)
                         .fontWeight(.semibold)
-                    Text("@\(profile.userName)")
+                    Text("@\(user.userName)")
                         .foregroundStyle(.gray)
-                    Text(profile.userBio)
+                    Text(user.userBio)
                 }
             }
     }

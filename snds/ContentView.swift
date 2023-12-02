@@ -11,8 +11,8 @@ import SwiftData
 struct ContentView: View {
     
     @State
-    // var loginState: LoginState = .loggedOut
-    var loginState: LoginState = .loggedIn(dummyUser)
+    var loginState: LoginState = .loggedOut
+    // var loginState: LoginState = .loggedIn(dummyUser)
     
     var body: some View {
         switch loginState {
@@ -21,6 +21,7 @@ struct ContentView: View {
         case .loggedIn(let user):
             MainView(user: user, loggedInState: $loginState)
         }
+        // NewPostView(onPost: {_ in }, user: dummyUser, writingPost: .constant(true))
     }
 }
 

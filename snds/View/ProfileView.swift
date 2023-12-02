@@ -26,15 +26,17 @@ struct ProfileView: View {
     var body: some View {
         
         NavigationStack{
+            
             ScrollView(.vertical) {
                 if let profile{
+                    
                     VStack{
-                        ProfileCard(profile: profile)
+                        ProfileCard(user: profile)
                             .hAlign(.center)
                             .padding(.horizontal, 15)
-                        UserContents(profile: profile)                        
+                        
+                        UserContents(user: profile)
                     }
-                    
                     
                 }else{
                     ProgressView()
