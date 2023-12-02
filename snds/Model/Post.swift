@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Post: Identifiable, Codable {
-    var id: UUID
+    @DocumentID var id: String?
     // var imgURL: URL?
     // var imgRefID: String = ""
     var date: Date = Date()
@@ -23,7 +23,7 @@ struct Post: Identifiable, Codable {
     // var userProfileURL: URL
     
     // attachment - an embed to a song they're referencing
-    // var song = Song? // TODO: find an API (i.e. Spotify, Genius, YT?) that gives information of songs
+    var songAttachment: Song?
     
     enum CodingKeys: CodingKey {
         case id
@@ -33,5 +33,6 @@ struct Post: Identifiable, Codable {
         case userName
         case userDispName
         case userUID
+        case songAttachment
     }
 }
