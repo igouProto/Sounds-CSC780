@@ -16,15 +16,15 @@ The following is a tentative list of features to be implemented:
 - [x] Delete posts
 
 ## Good to have features
-- [] Personal profile with customizable profile picture and status message
-- [] Seeing other's profile
-- [] Make a post from the result of music recognition (ShazamKit)
-- [] Reposting
-- [] Add comment to posts
-- [] Quote lyrics when posting
-- [] Add recording from music recognition to posts
-- [] Add pictures to posts
-- [] Add music from other's posts to a personal collection
-- [] Following others
-- [] Feed with posts from following users only
-- [] Follower count
+- [ ] Personal profile with customizable profile picture and status message
+- [ ] Seeing other's profile
+- [ ] Make a post from the result of music recognition (ShazamKit)
+- [ ] Reposting
+- [ ] Add comment to posts
+- [ ] Quote lyrics when posting
+- [ ] Add recording from music recognition to posts
+- [ ] Add pictures to posts
+- [ ] Add music from other's posts to a personal collection
+- [ ] Following others
+- [ ] Feed with posts from following users only
+- [ ] Follower count
