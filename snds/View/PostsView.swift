@@ -4,6 +4,8 @@
 //
 //  Created by Reina Kawamoto on 2023/11/27.
 //
+// attribution - part of this file was adapted from this tutorial series:
+// https://www.youtube.com/playlist?list=PLimqJDzPI-H9u3cSJCPB_EJsTU8XP2NUT
 
 import SwiftUI
 import Firebase
@@ -13,16 +15,13 @@ struct PostsView: View {
     let user: User
     
     // control login state
-    @Binding
-    var loggedInState: LoginState
+    @Binding var loggedInState: LoginState
     
-    // control showing writing post view or not
-    @State
-    var writingPost: Bool = false
+    // control showing post composition view or not
+    @State var writingPost: Bool = false
     
     // list of posts to show
-    @State
-    private var recentPosts: [Post] = []
+    @State private var recentPosts: [Post] = []
     
     @State
     var isFetching: Bool = false
@@ -61,15 +60,12 @@ struct PostsView: View {
     func fetchPosts() async {
         do {
             var query: Query!
-            
             query = Firestore.firestore().collection("Posts").order(by: "date", descending: true).limit(to: 10)
             
             let docs = try await query.getDocuments()
-            
             let fetchedPosts = docs.documents.compactMap { doc -> Post? in
                 
                 try? doc.data(as: Post.self)
-                
             }
             
             await MainActor.run(body: {
