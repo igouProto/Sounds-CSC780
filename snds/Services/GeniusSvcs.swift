@@ -4,6 +4,7 @@
 //
 //  Created by Reina Kawamoto on 2023/12/1.
 //
+// attribution: the SongsResponse struct was generated with ChatGPT
 
 import Foundation
 
@@ -28,7 +29,7 @@ struct Constants {
     static var url: String = "https://api.genius.com/search?access_token=\(clientToken)&q="
 }
 
-// attribution: generated with ChatGPT
+
 struct SongsResponse: Codable {
     let meta: Meta
     
@@ -81,7 +82,6 @@ struct GeniusSvcs {
             
             let songs = songsResp.response.hits.compactMap{ hit -> Song? in
                 let songRes = hit.result
-                
                 return Song(title: songRes.title, url: songRes.url, songArtImageUrl: songRes.songArtImageUrl, artistNames: songRes.artistNames)
             }
             

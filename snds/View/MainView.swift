@@ -12,8 +12,7 @@ struct MainView: View {
     let user: User
     
     // control login state
-    @Binding
-    var loggedInState: LoginState
+    @Binding var loggedInState: LoginState
     
     var body: some View {
         

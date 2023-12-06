@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Song: Codable { // the song we're using in this app
+struct Song: Codable { // the song that will be attached to posts
     let title: String
     let url: String
     let songArtImageUrl: String

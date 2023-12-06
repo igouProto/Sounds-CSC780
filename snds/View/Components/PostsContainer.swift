@@ -5,16 +5,16 @@
 //  Created by Reina Kawamoto on 2023/11/28.
 //
 
+// attribution - part of this file was adapted from this tutorial series:
+// https://www.youtube.com/playlist?list=PLimqJDzPI-H9u3cSJCPB_EJsTU8XP2NUT
+
 import SwiftUI
 import Firebase
 
 struct PostsContainer: View {
     
     let user: User
-    
-    @Binding
-    var posts: [Post]
-    
+    @Binding var posts: [Post]
     @State var isFetching: Bool = true
     
     // pagination

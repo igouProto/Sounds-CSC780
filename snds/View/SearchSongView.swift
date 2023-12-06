@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SearchSongView: View {
     
+    // query to Genius and the results
     let svc = GeniusSvcs()
-    
     @State private var queryText: String = ""
     @State private var results: [Song] = []
     
@@ -45,29 +45,36 @@ struct SearchSongView: View {
                 
                 SearchBar(text: $queryText, onSearch: {
                     Task {
+                        pending = true
                         results = try await svc.searchForSongs(queryText)
+                        pending = false
                     }
                 })
                 
-                List(results, id: \.title) { song in
-                    VStack(alignment: .leading) {
-                        Text(song.title)
-                            .font(.headline)
-                        Text(song.artistNames)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+                ZStack{
+                    if (pending == true) {
+                        ProgressView()
                     }
-                    .padding()
-                    .onTapGesture {
-                        chosenSong = song
-                        
-                        // close the panel
-                        searchingForSong = false
+                    
+                    List(results, id: \.title) { song in
+                        VStack(alignment: .leading) {
+                            Text(song.title)
+                                .font(.headline)
+                            Text(song.artistNames)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                        .padding()
+                        .onTapGesture {
+                            chosenSong = song
+                            
+                            // close the panel
+                            searchingForSong = false
+                        }
                     }
                 }
             }
             .vAlign(.topLeading)
-            
         }
     }
 }

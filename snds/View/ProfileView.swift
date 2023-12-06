@@ -4,6 +4,8 @@
 //
 //  Created by Reina Kawamoto on 2023/11/27.
 //
+// attribution - part of this file was adapted from this tutorial series:
+// https://www.youtube.com/playlist?list=PLimqJDzPI-H9u3cSJCPB_EJsTU8XP2NUT
 
 import SwiftUI
 
@@ -14,14 +16,12 @@ import FirebaseFirestore
 
 struct ProfileView: View {
     
+    // the current user and the profile to show
     let user: User
-    
-    @State
-    var profile: User?
+    @State var profile: User?
     
     // control login state
-    @Binding
-    var loggedInState: LoginState
+    @Binding var loggedInState: LoginState
     
     var body: some View {
         

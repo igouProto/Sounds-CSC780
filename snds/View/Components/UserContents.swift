@@ -11,8 +11,7 @@ struct UserContents: View {
     
     var user: User
     
-    @State
-    private var recentPosts: [Post] = []
+    @State private var recentPosts: [Post] = []
     
     var body: some View {
         VStack{
@@ -23,7 +22,6 @@ struct UserContents: View {
                 .hAlign(.leading)
                 .padding(20)
             
-            // TODO: Show the user's posts
             PostsContainer(user: user, posts: $recentPosts, fetchingByUID: true, fetchUserUID: user.userUID)
             
         }        

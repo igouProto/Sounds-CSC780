@@ -4,6 +4,8 @@
 //
 //  Created by Reina Kawamoto on 2023/11/29.
 //
+// attribution: The album art loading functions below the MusicEmbed View
+// was generated with ChatGPT
 
 import SwiftUI
 import Combine
@@ -61,7 +63,6 @@ struct MusicEmbed: View {
 }
 
 // album art loader functions
-// attribution: generated with ChatGPT
 class ImageLoader: ObservableObject {
     @Published var imageData: Data?
     

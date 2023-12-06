@@ -5,6 +5,9 @@
 //  Created by Reina Kawamoto on 2023/11/28.
 //
 
+// attribution - part of this file was adapted from this tutorial series:
+// https://www.youtube.com/playlist?list=PLimqJDzPI-H9u3cSJCPB_EJsTU8XP2NUT
+
 import SwiftUI
 import Firebase
 import FirebaseStorage
@@ -12,12 +15,11 @@ import FirebaseStorage
 struct PostCard: View {
     
     var post: Post
-    
     let user: User
     
     // callbacks
-    var onUpdate: (Post) -> () // for liking posts
-    var onDelete: () -> ()
+    var onUpdate: (Post) -> () // for liking a post
+    var onDelete: () -> () // for removing a post
     
     // update post status
     @State private var docListener: ListenerRegistration?
@@ -66,7 +68,6 @@ struct PostCard: View {
                     .textSelection(.enabled)
                     .padding(.vertical, 6)
                 
-                // TODO: Song embed goes here
                 if (post.songAttachment != nil){
                     MusicEmbed(song: post.songAttachment)
                 }
@@ -91,7 +92,6 @@ struct PostCard: View {
                     .hAlign(.trailing)
                 }
             }
-            
             
         }
         .padding(.horizontal, 10)

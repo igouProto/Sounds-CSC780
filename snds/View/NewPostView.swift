@@ -4,6 +4,8 @@
 //
 //  Created by Reina Kawamoto on 2023/11/28.
 //
+// attribution - part of this file was adapted from this tutorial series:
+// https://www.youtube.com/playlist?list=PLimqJDzPI-H9u3cSJCPB_EJsTU8XP2NUT
 
 import SwiftUI
 
@@ -12,14 +14,18 @@ import FirebaseStorage
 
 struct NewPostView: View {
     
+    // callback
     var onPost: (Post) -> ()
-    
-    // currently composing post
-    @State
-    private var postText: String = ""
     
     // current user info
     let user: User
+    
+    // the post the user's currently composing
+    @State private var postText: String = ""
+    
+    // post length (don't want to make it too long)
+    @State private var postLength = 0
+    private let maxLength = 300
     
     // control showing this view
     @Binding var writingPost: Bool
@@ -62,7 +68,7 @@ struct NewPostView: View {
                         .padding(.vertical, 10)
                         .background(.black, in: Capsule())
                 })
-                .disabledElement(postText == "")
+                .disabledElement((postText == "" && chosenSong == nil) || postLength > maxLength)
             }
             .padding(.horizontal, 15)
             .padding(.vertical, 10)
@@ -76,8 +82,15 @@ struct NewPostView: View {
                 VStack(spacing: 20){
                     TextField("What are you listening to?", text: $postText, axis: .vertical)
                         .focused($showKB)
+                        .onChange(of: postText) {
+                            postLength = postText.count
+                        }
                     
-                    //TODO: show a song embed if song info is provided
+                    Text("\(postLength) / \(maxLength)")
+                        .font(.caption)
+                        .foregroundStyle(postLength > maxLength ? .red : .gray)
+                        .hAlign(.leading)
+                    
                     if ((chosenSong) != nil){
                         VStack(alignment: .leading){
                             MusicEmbed(song: chosenSong ?? nil)
