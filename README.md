@@ -10,11 +10,13 @@ The following is a tentative list of features to be implemented:
 - Make a post from the result of searching for a song (Genius / Spotify api)
 - Make a pure text post
 - Posts with music information embedded
-- Personal profile with customizable profile picture and status message
+- Personal profile
 - See your own posts
 - Delete posts
 
 ## Good to have features
+- Personal profile with customizable profile picture and status message
+- Seeing other's profile
 - Make a post from the result of music recognition (ShazamKit)
 - Reposting
 - Add comment to posts
