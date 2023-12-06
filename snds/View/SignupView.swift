@@ -4,6 +4,8 @@
 //
 //  Created by Reina Kawamoto on 2023/11/25.
 //
+// attribution - part of this file was adapted from this tutorial series:
+// https://www.youtube.com/playlist?list=PLimqJDzPI-H9u3cSJCPB_EJsTU8XP2NUT
 
 import SwiftUI
 // import PhotosUI
@@ -13,44 +15,35 @@ import FirebaseStorage
 import FirebaseFirestore
 
 struct SignupView: View {
-    @State
-    var emailID: String = ""
-    
-    @State
-    var userName: String = ""
-    
-    @State
-    var password: String = ""
     
     // user profile stuff
-    @State
-    var displayName: String = ""
-    
-    @State
-    var bio: String = ""
-    
-    @State
-    var userPFP: Data?
+    @State var emailID: String = ""
+    @State var userName: String = ""
+    @State var password: String = ""
+    @State var displayName: String = ""
+    @State var bio: String = ""
+    @State var userPFP: Data?
     
     // control showing views
     @Binding var signingUp: Bool
-    @State var showImgPicker: Bool = false
-    // @State var pfpSelected: PhotosPickerItem?
+    // @State var showImgPicker: Bool = false
     
-    // error handling
+    // error showing
     @State var showError: Bool = false
     @State var errorMsg: String = ""
     
     // control login state
-    @Binding
-    var loggedInState: LoginState
+    @Binding var loggedInState: LoginState
+    
+    // show loading indicator when signing up
+    @State var pending: Bool = false
     
     var body: some View {
         Spacer()
         VStack{
             Image("LandingPageLogo")
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 50, trailing: 0))
-            Text("Make an account").foregroundStyle(.gray).hAlign(.leading)
+            Text("Make an Account").foregroundStyle(.gray).hAlign(.leading)
             TextField("Email", text: $emailID)
                 .padding(10)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
@@ -107,6 +100,11 @@ struct SignupView: View {
         .alert(errorMsg, isPresented: $showError, actions: {})
         .padding(50)
         .vAlign(.center)
+        .overlay {
+            if (pending == true) {
+                WindowedProgressView()
+            }
+        }
         /*
         .photosPicker(isPresented: $showImgPicker, selection: $pfpSelected)
         .onChange(of: pfpSelected, perform: { selectedPFP in
@@ -137,9 +135,10 @@ struct SignupView: View {
     func register () {
         Task {
             do {
+                pending = true
+                
                 // make a firebase acc.
                 try await Auth.auth().createUser(withEmail: emailID, password: password)
-                
                 guard let userUID = Auth.auth().currentUser?.uid else { return }
                 
                 // upload pfp to firebase storage (don't have time for this now)
@@ -159,7 +158,7 @@ struct SignupView: View {
                 let _ = try Firestore.firestore().collection("Users").document(userUID).setData(from: registeringUser, completion: { error in
                     if error == nil { // no error -> user saved successsfully
                         print("Create user succeeded!")
-                        
+                        pending = false
                         // log the registering user in upon acc. creation
                         loggedInState = .loggedIn(registeringUser)                        
                     }else {
@@ -168,12 +167,12 @@ struct SignupView: View {
                     
                 })
             }catch{
+                pending = false
                 await showError(error)
             }
         }
     }
     
-    // error message with alert
     func showError(_ err: Error) async {
         await MainActor.run(body: {
             errorMsg = err.localizedDescription
@@ -181,9 +180,4 @@ struct SignupView: View {
         })
     }
 }
-
-/*
- #Preview {
-     SignupView(emailID: "", signingUp: .constant(true))
-*/
 

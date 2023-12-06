@@ -4,28 +4,30 @@
 //
 //  Created by Reina Kawamoto on 2023/11/25.
 //
+// attribution - part of this file was adapted from this tutorial series:
+// https://www.youtube.com/playlist?list=PLimqJDzPI-H9u3cSJCPB_EJsTU8XP2NUT
 
 import SwiftUI
 import Firebase
 
 struct LoginView: View {
     
-    @State
-    var emailID: String = ""
+    // credentials
+    @State var emailID: String = ""
+    @State var password: String = ""
     
-    @State
-    var password: String = ""
-    
-    @State // show the sign up page or not
-    var signingUp: Bool = false
+    // show the sign up page or not
+    @State var signingUp: Bool = false
     
     // error handling
     @State var showError: Bool = false
     @State var errorMsg: String = ""
     
     // control login state
-    @Binding
-    var loggedInState: LoginState
+    @Binding var loggedInState: LoginState
+    
+    // show loading indicator when logging in
+    @State var pending: Bool = false
     
     var body: some View {
         Spacer()
@@ -54,6 +56,11 @@ struct LoginView: View {
         .padding(50)
         .vAlign(.center)
         .alert(errorMsg, isPresented: $showError, actions: {})
+        .overlay {
+            if (pending == true){
+                WindowedProgressView()
+            }
+        }
         
         HStack {
             Button("Sign Up") {
@@ -70,17 +77,20 @@ struct LoginView: View {
         .padding(50)
     }
     
+    
     func signIn () {
         print("\(emailID), \(password)")
         Task {
             do {
+                pending = true
+                
                 try await Auth.auth().signIn(withEmail: emailID, password: password)
                 print("User Found!")
-                
                 // fetch user info from firebase
                 try await fetchUser()
                 
             }catch{
+                pending = false
                 print(error)
                 await showError(error)
             }
@@ -93,6 +103,7 @@ struct LoginView: View {
         let foundUser = try await Firestore.firestore().collection("Users").document(userUID).getDocument(as: User.self)
         
         await MainActor.run(body: {
+            pending = false
             // switch login state
             loggedInState = .loggedIn(foundUser)
         })
@@ -110,7 +121,6 @@ struct LoginView: View {
         }
     }
     
-    // error message with alert
     func showError(_ err: Error) async {
         await MainActor.run(body: {
             errorMsg = err.localizedDescription
